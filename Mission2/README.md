@@ -1,0 +1,1 @@
+To create a fuzzer for pentesting pulling the latest wordlists and offering the user a choice

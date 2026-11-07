@@ -1,0 +1,32 @@
+{
+    "wordlists":[
+        {
+            "name":"PayloadsAllTheThings - Directories 2.3 Medium", 
+            "url":"https://raw.githubusercontent.com/3ndG4me/KaliLists/refs/heads/master/dirbuster/directory-list-2.3-medium.txt"
+        },
+        {
+            "name":"Seclists - Common.txt",
+            "url":"https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Discovery/Web-Content/common.txt"
+        },
+        {
+            "name":"Forced Browsing - All Directories",
+            "url":"https://raw.githubusercontent.com/duyet/bruteforce-database/refs/heads/master/forced-browsing/all-dirs.txt"
+        },
+        {
+            "name":"FuzzingLists - Directory Fuzzing",
+            "url":"https://raw.githubusercontent.com/Rockpratapsingh/Fuzzing-Wordlist/refs/heads/main/directory-fuzzing.txt"
+        },
+        {
+            "name":"Seclists - Big.txt",
+            "url":"https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Discovery/Web-Content/big.txt"
+        },
+        {
+            "name":"Seclists - Large Files",
+            "url":"https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Discovery/Web-Content/raft-large-files.txt"
+        },
+        {
+            "name":"Seclists - Nginx",
+            "url":"https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Discovery/Web-Content/Web-Servers/nginx.txt"
+        }
+    ] 
+}
