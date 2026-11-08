@@ -43,21 +43,22 @@ def getWordlistContent(url):
         exit()
 
 
-def main():
-    pp.question("What rate limit would you like?")
+def setRateLimit():
+    pp.question("What rate limit would you like? (use 0.5 for 500 milliseconds, whole numbers are seconds)")
     try:
-        rateLimit = int(input())
+        rateLimit = float(input())
+        return rateLimit
     except:
         pp.failure("Rate limit must be an integer, exiting.")
         exit()
+
+def setTargetURL():
     pp.question("What URL do you want to target? (i.e https://google.com)")
     target = input() + "/"
-    wordlistURL = selectWordlistAndURL()
-    print("Retrieving wordlist from: " + wordlistURL)
-    time.sleep(2)
-    wordlist = getWordlistContent(wordlistURL).split('\n')
-    
-    for i in range(0, len(wordlist)):
+    return target
+
+def sprayTarget(target, rateLimit, wordlist):
+     for i in range(0, len(wordlist)):
         if "#" in wordlist[i]:
             print("Wordlist item: " + wordlist[i] + " is a comment, skipping...")
             continue
@@ -68,9 +69,24 @@ def main():
             if request.status_code == 200:
                 pp.success("--> Request to: " + target + wordlist[i] + " (Status Code: " + str(request.status_code) + ")" )
                 time.sleep(rateLimit)
+
+            if request.status_code == 302 or request.status_code == 301:
+                pp.question("--> Redirect discovered at: " + target + wordlist[i] + " (Status Code: " + str(request.status_code) + ")" )
             else:
                 pp.failure("--> Request to: " + target + wordlist[i] + " (Status Code: " + str(request.status_code) + ")" )
                 time.sleep(rateLimit)
+
+
+def main():
+    rateLimit = setRateLimit()
+    target = setTargetURL()
+    
+    wordlistURL = selectWordlistAndURL()
+    print("Retrieving wordlist from: " + wordlistURL)
+    time.sleep(2)
+    wordlist = getWordlistContent(wordlistURL).split('\n')
+    sprayTarget(target, rateLimit, wordlist)
+    
 
 if __name__ == '__main__':
     main()
