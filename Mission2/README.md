@@ -1,1 +1,1 @@
-To create a fuzzer for pentesting pulling the latest wordlists and offering the user a choice
+To create a fuzzer for pentesting pulling the latest wordlists and offering the user a choice of wordlists that get pulled from their latest github version
