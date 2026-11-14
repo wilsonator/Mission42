@@ -1,0 +1,1 @@
+I wanted to make something in tkinter that was simple, and settled on a quick weather app
