@@ -37,8 +37,6 @@ app.geometry("600x250")
 # everything goes here
 getAndDisplayLocations()
 
-refresh = customtkinter.CTkButton(app, text="Refresh", command=print("I pressed button"))
-refresh.grid()
 
 app.mainloop()
 
