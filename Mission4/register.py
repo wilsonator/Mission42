@@ -37,13 +37,18 @@ event_xpath = (
 "//a[contains(., 'Register')]"
 )
 
-#find the "Register" button and extract its value, this vUY
-register_button = wait.until(EC.element_to_be_clickable((By.XPATH, event_xpath)))
+#find the "Register" button and extract its value, if event not found then exit
+try:
+    register_button = wait.until(EC.element_to_be_clickable((By.XPATH, event_xpath)))
+    # Extract the URL
+    register_url = register_button.get_attribute("href")
 
-# 5. Extract the URL
-register_url = register_button.get_attribute("href")
+    print(f"Successfully found URL: {register_url}")
+except:
+    print("Event not found, exiting....")
+    driver.close()
+    exit()
 
-print(f"Successfully found URL: {register_url}")
 
 driver.get(register_url)
 
@@ -69,7 +74,7 @@ try:
 
 except:
     # otherwise if a section wasn't available, just register the user. 
-    # This is relevant for quads and other events
+    # This is relevant for quads and other events with no section
     submit_button = wait.until(EC.element_to_be_clickable((By.ID, "submit-btn")))
 
     # Click the button
@@ -78,6 +83,7 @@ except:
         print("Clicked the registration/payment button. Registration completed.")
     except:
         print("Registration did not succeed because the section didn't exist or the event didn't exist")
+        driver.close()
         exit()
                     
 

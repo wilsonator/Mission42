@@ -16,8 +16,10 @@ If using Windows, Compile the script using
 1. Install uv: https://docs.astral.sh/uv/
 2. Run 'uv venv'
 3. Run 'uv install pyinstaller'
-4. Run 'pyinstaller --onefile --add-data=".env:." register.py'
-Use the compiled binary in a scheduled task in windows
+4. Run 'uv run pip install -r requirements.txt'
+5. Run 'uv run pyinstaller --onefile --hidden-import=selenium.webdriver.chrome.webdriver  register.py'
+6. A dist folder will be created in this folder, copy and paste your .env file there for the script to run.
+Use the compiled binary in a scheduled task in windows an example would be 'cmd.exe /k cd PATH_TO_DIST && register.exe'
 
 If using Linux, setup a CRON job and run the file using uv, or use as a standalone
 1. Install uv: https://docs.astral.sh/uv/
