@@ -30,7 +30,6 @@ def getAndDisplayLocations():
     label.pack()
     
 
-
 app = customtkinter.CTk()
 app.title("Weather App")
 app.geometry("600x250")
