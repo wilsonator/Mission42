@@ -15,8 +15,8 @@ How to use:
 If using Windows, Compile the script using 
 1. Install uv: https://docs.astral.sh/uv/
 2. Run 'uv venv'
-3. uv install pyinstaller
-4. pyinstaller --onefile --add-data=".env:." register.py
+3. Run 'uv install pyinstaller'
+4. Run 'pyinstaller --onefile --add-data=".env:." register.py'
 Use the compiled binary in a scheduled task in windows
 
 If using Linux, setup a CRON job and run the file using uv, or use as a standalone
