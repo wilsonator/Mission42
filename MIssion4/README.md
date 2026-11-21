@@ -12,11 +12,15 @@ How to use:
 7. Change the name of .env.example to .env
 
 
-If using Windows, Compile the script using pyinstaller --onefile --add-data=".env:." register.py
+If using Windows, Compile the script using 
+1. Install uv: https://docs.astral.sh/uv/
+2. Run 'uv venv'
+3. uv install pyinstaller
+4. pyinstaller --onefile --add-data=".env:." register.py
 Use the compiled binary in a scheduled task in windows
 
 If using Linux, setup a CRON job and run the file using uv, or use as a standalone
-Install uv: https://docs.astral.sh/uv/
-uv venv
-uv pip install -r requirements.txt
-uv run register.py
+1. Install uv: https://docs.astral.sh/uv/
+2. Run 'uv venv'
+3. Run 'uv pip install -r requirements.txt'
+4. Run 'uv run register.py'
